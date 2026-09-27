@@ -1,4 +1,4 @@
-// Hand-traced from Petra Group's supplied axonometric masterplan, not a cadastral survey.
+// Illustrative building positions for the demo3 coastal scene.
 // Metres are illustrative. X follows the beachfront; +Z points toward the sea.
 // Local residence numbers identify this model only, not sales inventory.
 const roofs = [
@@ -30,17 +30,17 @@ export const pavilions = [[391,232],[412,261],[414,284],[448,297],[484,302],[532
 export const buildings = [
   {id:'landmark',name:'Sculptural landmark',category:'landmark',kind:'landmark',x:-258,z:82,w:47,d:36,floors:45,height:151,rotation:0},
   ...['A','B','C'].map((name,i)=>({id:`tower-${name.toLowerCase()}`,name:`Apartment tower ${name}`,category:'towers',kind:'tower',x:36+i*92,z:-119,w:29,d:47,floors:29,height:94,rotation:0})),
-  {id:'pullman-a',name:'Pullman Residences · A',category:'pullman',kind:'pullman',x:249,z:74,w:43,d:28,floors:25,height:83,rotation:-.15},
-  {id:'pullman-b',name:'Pullman Living · B',category:'pullman',kind:'pullman',x:291,z:111,w:22,d:34,floors:23,height:76.4,rotation:-.15},
+  {id:'beachfront-a',name:'Beachfront Residences · A',category:'beachfront',kind:'beachfront',x:249,z:74,w:43,d:28,floors:25,height:83,rotation:-.15},
+  {id:'beachfront-b',name:'Beachfront Living · B',category:'beachfront',kind:'beachfront',x:291,z:111,w:22,d:34,floors:23,height:76.4,rotation:-.15},
   {id:'terraces',name:'Seafront terraces',category:'terraces',kind:'terraces',x:-20,z:110,w:108,d:43,floors:5,height:19,rotation:0},
   ...residences,...pavilions,
 ];
 export const districts = [
-  {id:'all',name:'The whole resort',short:'Entire resort',eyebrow:'A PLACE OF YOUR OWN',description:'Follow the coast, wander through the gardens, and discover the architecture of Petra Sea Resort.',image:'masterplan.webp',target:[0,20,0],position:[400,416,705]},
-  {id:'residences',name:'Life in the gardens',short:'Garden residences',eyebrow:'LOW-RISE LIVING',description:'Rounded balconies and sheltered courtyards. A collection of residences woven through the resort’s green heart.',image:'residences.webp',target:[-124,14,44],position:[-8,130,250]},
-  {id:'towers',name:'Above the coastline',short:'Apartment towers',eyebrow:'THREE TOWERS · A / B / C',description:'The three rear towers rise above the gardens, with long balcony façades and pools at their feet.',image:'triplets.jpg',target:[127,42,-116],position:[290,181,155]},
-  {id:'pullman',name:'A new horizon',short:'Pullman residences',eyebrow:'PULLMAN LIVING & RESIDENCES',description:'Two curved towers mark the beachfront, with layered terraces, rooftop pools and open views toward the Black Sea.',image:'pullman.webp',target:[263,36,85],position:[415,136,304]},
-  {id:'landmark',name:'A sculpted skyline',short:'Sculptural landmark',eyebrow:'THE MASTERPLAN’S LANDMARK',description:'The flowing silhouette and arched crown interpret the distinctive tall building in the developer’s resort render.',image:'landmark.webp',target:[-258,69,82],position:[-100,167,315]},
-  {id:'gardens',name:'Room to slow down',short:'Lake & gardens',eyebrow:'THE GREEN HEART',description:'A lake, intimate pavilions and shaded paths form a quiet counterpoint to the beachfront. Explore the sports courts nearby.',image:'masterplan.webp',target:[-153,3,-121],position:[-38,186,100]},
-  {id:'terraces',name:'At the water’s edge',short:'Beach & marina',eyebrow:'THE BLACK SEA',description:'A palm-lined promenade connects the terraced seafront building, beach gardens and the small marina.',image:'residences.webp',target:[-45,10,160],position:[95,135,425]},
+  {id:'all',name:'The whole resort',short:'Entire resort',eyebrow:'A PLACE OF YOUR OWN',description:'Follow the coast, wander through the gardens, and discover the architecture of demo3.',target:[0,20,0],position:[400,416,705]},
+  {id:'residences',name:'Life in the gardens',short:'Garden residences',eyebrow:'LOW-RISE LIVING',description:'Rounded balconies and sheltered courtyards. A collection of residences woven through the resort’s green heart.',target:[-124,14,44],position:[-8,130,250]},
+  {id:'towers',name:'Above the coastline',short:'Apartment towers',eyebrow:'THREE TOWERS · A / B / C',description:'The three rear towers rise above the gardens, with long balcony façades and pools at their feet.',target:[127,42,-116],position:[290,181,155]},
+  {id:'beachfront',name:'A new horizon',short:'Beachfront residences',eyebrow:'BEACHFRONT LIVING & RESIDENCES',description:'Two curved towers mark the beachfront, with layered terraces, rooftop pools and open views toward the sea.',target:[263,36,85],position:[415,136,304]},
+  {id:'landmark',name:'A sculpted skyline',short:'Sculptural landmark',eyebrow:'THE MASTERPLAN’S LANDMARK',description:'The flowing silhouette and arched crown form an illustrative landmark building.',target:[-258,69,82],position:[-100,167,315]},
+  {id:'gardens',name:'Room to slow down',short:'Lake & gardens',eyebrow:'THE GREEN HEART',description:'A lake, intimate pavilions and shaded paths form a quiet counterpoint to the beachfront. Explore the sports courts nearby.',target:[-153,3,-121],position:[-38,186,100]},
+  {id:'terraces',name:'At the water’s edge',short:'Beach & marina',eyebrow:'THE COAST',description:'A palm-lined promenade connects the terraced seafront building, beach gardens and the small marina.',target:[-45,10,160],position:[95,135,425]},
 ];

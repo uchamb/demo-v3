@@ -8,12 +8,12 @@ const $=selector=>document.querySelector(selector);
 const viewport=$('#viewport'),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let renderer;
 try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});}catch{
-  $('#loading').replaceChildren(Object.assign(document.createElement('p'),{textContent:'The 3D resort needs WebGL 2. You can still explore the reference renders.'}));
+  $('#loading').replaceChildren(Object.assign(document.createElement('p'),{textContent:'The 3D resort needs WebGL 2. Enable hardware acceleration or try a compatible browser.'}));
 }
-// The reference gallery remains available even without WebGL.
-$('#sources-open').onclick=()=>{$('#sources-dialog').showModal();window.petraResort?.stopMotion();};
-$('#sources-close').onclick=()=>$('#sources-dialog').close();
-$('#sources-dialog').addEventListener('click',e=>{if(e.target===$('#sources-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
+// Demo information remains available even without WebGL.
+$('#about-open').onclick=()=>{$('#about-dialog').showModal();window.demo3?.stopMotion();};
+$('#about-close').onclick=()=>$('#about-dialog').close();
+$('#about-dialog').addEventListener('click',e=>{if(e.target===$('#about-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
 if(renderer)start();
 
 function start(){
@@ -54,7 +54,7 @@ function start(){
   const labelData=[
     {district:'landmark',text:'SCULPTURAL LANDMARK',at:[-258,154,82]},
     {district:'towers',text:'APARTMENT TOWERS',at:[128,103,-119]},
-    {district:'pullman',text:'PULLMAN RESIDENCES',at:[273,91,88]},
+    {district:'beachfront',text:'BEACHFRONT RESIDENCES',at:[273,91,88]},
     {district:'gardens',text:'LAKE & GARDENS',at:[-150,5,-125]},
     {district:'residences',text:'GARDEN RESIDENCES',at:[-124,30,28]},
     {district:'terraces',text:'BEACH & MARINA',at:[-228,3,235]},
@@ -71,8 +71,7 @@ function start(){
   function updatePlace(d,b=null){
     $('#place-eyebrow').textContent=b?`${d.short.toUpperCase()} · MODEL DETAIL`:d.eyebrow;
     $('#place-title').textContent=b?b.name:d.name;
-    const verified=b&&['tower','pullman'].includes(b.kind);
-    $('#place-description').textContent=b?`${b.floors} ${verified?'floors in the developer’s selector':'illustrative levels'}. ${b.kind==='residence'?'A garden residence traced from the resort render. This number identifies the model only.':d.description}`:d.description;
+    $('#place-description').textContent=b?`${b.floors} illustrative levels. ${b.kind==='residence'?'An illustrative garden residence. This number identifies the model only.':d.description}`:d.description;
     $('#place-index').textContent=String(districts.indexOf(d)+1).padStart(2,'0');
     $('#focus-place').firstChild.textContent=b?'Look closer ':'Explore this view ';
     if(isCompact()){$('#place-eyebrow').textContent=b?b.name.toUpperCase():d.short.toUpperCase();}
@@ -113,7 +112,7 @@ function start(){
   function setView(name,instant=false){
     stopTour();markView(name);
     const views={overview:{position:districts[0].position,target:districts[0].target},aerial:{position:[0,910,11],target:[0,0,10]},coast:{position:[105,145,845],target:[0,36,0]}};
-    const v=views[name];moveCamera(v.position,v.target,instant,true);$('#current-view').textContent={overview:'RESORT OVERVIEW',aerial:'THE MASTERPLAN',coast:'FROM THE BLACK SEA'}[name];
+    const v=views[name];moveCamera(v.position,v.target,instant,true);$('#current-view').textContent={overview:'RESORT OVERVIEW',aerial:'THE MASTERPLAN',coast:'FROM THE COAST'}[name];
   }
   document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
   const lights={
@@ -138,7 +137,7 @@ function start(){
   $('#zoom-in').onclick=()=>zoom(.81);$('#zoom-out').onclick=()=>zoom(1.23);
   $('#reset').onclick=()=>{stopTour();selectDistrict(districts[0]);disclosure(!isCompact());};
   $('#rotate').onclick=()=>{stopTour();tween=null;state.transitioning=false;controls.autoRotate=!controls.autoRotate;$('#rotate').setAttribute('aria-pressed',String(controls.autoRotate));dirty=true;};
-  const tourStops=['all','landmark','residences','gardens','towers','pullman','terraces'];
+  const tourStops=['all','landmark','residences','gardens','towers','beachfront','terraces'];
   function tourStop(){
     const d=districts.find(d=>d.id===tourStops[tourIndex]);selectDistrict(d);$('#tour-text').textContent=`Stop ${tourIndex+1} of ${tourStops.length} · Pause`;tourDeadline=performance.now()+7000;
   }
@@ -218,5 +217,5 @@ function start(){
     if(dirty||controls.autoRotate){scene.fog.near=Math.max(900,camera.position.distanceTo(controls.target)+200);scene.fog.far=scene.fog.near+1300;renderer.render(scene,camera);updateLabels();dirty=false;renderer.domElement.dataset.rendered='true';}
   }
   requestAnimationFrame(animate);$('#loading').classList.add('loaded');
-  window.petraResort={scene,camera,controls,renderer,state,stats:resort.stats,groups:resort.groups,buildings:resort.buildings,picks:resort.picks,stopMotion(){stopTour();stopOrbit();},get hovered(){return hovered;},get lightingTransition(){return !!lightTween;}};
+  window.demo3={scene,camera,controls,renderer,state,stats:resort.stats,groups:resort.groups,buildings:resort.buildings,picks:resort.picks,stopMotion(){stopTour();stopOrbit();},get hovered(){return hovered;},get lightingTransition(){return !!lightTween;}};
 }

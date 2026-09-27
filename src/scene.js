@@ -7,7 +7,7 @@ const material=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness
 export function createResort(){
   let seed=8921;
   const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
-  const root=new THREE.Group();root.name='Petra Sea Resort · masterplan interpretation';
+  const root=new THREE.Group();root.name='demo3 · masterplan interpretation';
   const groups={};
   for(const name of ['ground','architecture','landscape','amenities','water']){groups[name]=new THREE.Group();groups[name].name=name;root.add(groups[name]);}
   const M={
@@ -120,11 +120,11 @@ export function createResort(){
       }
       pool(b.x,b.z+33,39,12);pool(b.x+23,b.z+37,15,13);
     }else{
-      const step=b.kind==='pullman'?3.3:b.kind==='pavilion'?4:3.2;
+      const step=b.kind==='beachfront'?3.3:b.kind==='pavilion'?4:3.2;
       round(b,M.stone,0,.6,0,b.w+3,1.2,b.d+3);
       round(b,M.glass,0,b.height/2+1,0,b.w-2,b.height,b.d-2);
       for(let f=0;f<=b.floors;f++){
-        const taper=b.kind==='pullman'?Math.max(0,f-b.floors+5)*1.15:0;
+        const taper=b.kind==='beachfront'?Math.max(0,f-b.floors+5)*1.15:0;
         round(b,M.slab,0,1+f*step,0,b.w-taper,.46,b.d-taper*.4);
         if(f<b.floors){
           round(b,M.rail,0,1.5+f*step,0,b.w-.6-taper,.45,b.d-.6-taper*.4);
@@ -134,7 +134,7 @@ export function createResort(){
       windows(b,b.w,b.d,b.floors,step);
       round(b,M.roof,0,b.height+1.3,0,b.w-3,.24,b.d-3);
       round(b,M.stone,0,b.height+2,0,b.w*.31,1.8,b.d*.26);
-      if(b.kind==='pullman'){
+      if(b.kind==='beachfront'){
         round(b,M.pool,0,b.height+1.6,7,b.w*.6,.18,6);
         for(const side of [-1,1])rect(b,M.wood,side*(b.w*.38),b.height/2,0,1.3,b.height,b.d-.9);
       }
