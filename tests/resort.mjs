@@ -1,3 +1,4 @@
+// Reduce software-rendering cost in CI while preserving CSS viewport and interaction coordinates.
 import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -25,7 +26,7 @@ async function roof(page,id){return page.evaluate(id=>{
   return{x:r.left+(p.x+1)*r.width/2,y:r.top+(1-p.y)*r.height/2};
 },id);}
 try{
-  const page=await browser.newPage({viewport:{width:1440,height:1000}});await collect(page);
+  const page=await browser.newPage({deviceScaleFactor:process.env.CI ? 0.5 : 1,viewport:{width:1440,height:1000}});await collect(page);
   await page.goto(`${base}/?source=validation`);await expect(page).toHaveURL(`${base}/?source=validation`);await ready(page);await settled(page);
   await expect(page).toHaveTitle('demo3 — A world by the sea');
   const stats=await page.evaluate(()=>({...demo3.stats,calls:demo3.renderer.info.render.calls,triangles:demo3.renderer.info.render.triangles}));
@@ -87,7 +88,7 @@ try{
   // Damping convergence depends on frame rate; wait for an actually idle interval.
   await expect.poll(async()=>{const frame=await page.evaluate(()=>demo3.renderer.info.render.frame);await page.waitForTimeout(400);return (await page.evaluate(()=>demo3.renderer.info.render.frame))===frame;},{timeout:30000}).toBe(true);
   await page.close();
-  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1,reducedMotion:'reduce'});
+  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:process.env.CI ? 0.5 : 1,reducedMotion:'reduce'});
   const mobile=await context.newPage();await collect(mobile);await mobile.goto(`${base}/`);await ready(mobile);
   await expect(mobile.locator('#place-content')).toBeHidden();assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth),390);
   await mobile.screenshot({path:`${output}/demo3-mobile.png`});
