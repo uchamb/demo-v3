@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node tests/petra.mjs"
+    "test": "node tests/resort.mjs"
   },
   "dependencies": {
     "three": "0.180.0"
@@ -16,5 +16,5 @@
     "vite": "6.4.1",
     "@playwright/test": "1.55.1"
   },
-  "description": "Explore a resort-scale scene with 50 selectable structures, district views, lighting controls, a reference gallery, and a guided tour."
+  "description": "Explore demo3: a coastal scene with 50 selectable structures, seven districts, and a guided tour."
 }

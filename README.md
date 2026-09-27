@@ -1,8 +1,8 @@
-# demo-v3 — Petra Sea Resort
+# demo3
 
 [Open the live demo](https://uchamb.github.io/demo-v3/)
 
-Explore a resort-scale scene with 50 selectable structures, district views, lighting controls, a reference gallery, and a guided tour.
+Explore demo3: a coastal scene with 50 selectable structures, seven districts, and a guided tour.
 
 ## Run locally
 
@@ -22,7 +22,7 @@ npm run build
 npm run preview
 ```
 
-Open http://localhost:5183/demo-v3/. The `dist` directory is a complete static website. JavaScript, fonts, geometry and reference images are bundled locally; no backend or runtime API key is required. Use an HTTP server, not a `file://` URL.
+Open http://localhost:5183/demo-v3/. The `dist` directory is a complete static website. JavaScript, fonts and geometry are bundled locally; no backend or runtime API key is required. Use an HTTP server, not a `file://` URL.
 
 The Vite base path is `/demo-v3/` for GitHub Pages. For a different hosting path, set `base` in `vite.config.js` accordingly.
 
@@ -40,6 +40,6 @@ Browser checks use Playwright and local Google Chrome. Set `CHROME_PATH` to use 
 
 GitHub Pages uses the GitHub Actions workflow in `.github/workflows/pages.yml`. Pull requests targeting `development` verify the production build. Merging into `development` builds and publishes the website automatically.
 
-## Sources
+## Modeling and licenses
 
-Project reference images retain their original attribution and rights. See [sources and modeling notes](public/SOURCES.md). Font and Three.js license notices are retained in `public/licenses/` and `src/fonts/`.
+All building dimensions and apartment layouts are illustrative. See [modeling notes](public/SOURCES.md). Font and Three.js license notices are retained in `public/licenses/` and `src/fonts/`.
